@@ -229,10 +229,37 @@ generateBtn.addEventListener('click', () => {
   const formData = new FormData(form);
   let prompt = templates[selected].prompt;
 
-  // Replace placeholders
+  // Replace placeholders only if value exists
   for (let [key, value] of formData.entries()) {
-    prompt = prompt.replace(new RegExp(`{${key}}`, 'g'), value || `[${key}]`);
+    if (value.trim() !== "") {
+      prompt = prompt.replace(new RegExp(`{${key}}`, 'g'), value);
+    }
   }
+
+  // Remove any leftover {placeholders} that weren't replaced
+  prompt = prompt
+  .replace(/{[^{}]+}/g, "")
+  .replace(/\n\s*\n/g, "\n\n") // remove extra blank lines
+  .trim();
+
+  // Build dialogs only if both character and text are filled
+  const dialogLines = [];
+  for (let i = 0; i < dialogCount; i++) {
+    const character = formData.get(`dialogCharacter${i}`);
+    const text = formData.get(`dialogText${i}`);
+
+    if (character && text && character.trim() !== "" && text.trim() !== "") {
+      dialogLines.push(`${character}: "${text}"`);
+    }
+  }
+
+  // Add dialog section to prompt if there are any valid lines
+  if (dialogLines.length > 0) {
+    prompt += `\n\nDialog:\n` + dialogLines.join('\n');
+  }
+
+  output.value = prompt;
+});
 
   // Add dialogs
   const dialogLines = [];
