@@ -48,20 +48,16 @@ button:hover {
   background-color: #0056b3;
 }
 
+#dialog-container .dialog-line {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
 .result {
   margin-top: 30px;
 }
 
 textarea {
   height: 300px;
-}
-
-.dialog-line {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.dialog-line input {
-  flex: 1;
 }
