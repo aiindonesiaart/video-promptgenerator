@@ -354,35 +354,56 @@
     addDialogBtn.addEventListener('click', addDialogRow);
 
     generateBtn.addEventListener('click', () => {
-      const selected = templateSelect.value;
-      if (!selected || !templates[selected]) return;
+  const selected = templateSelect.value;
+  if (!selected || !templates[selected]) return;
 
-      const formData = new FormData(form);
-      let prompt = templates[selected].prompt;
+  const formData = new FormData(form);
+  let prompt = templates[selected].prompt;
 
-      // Replace regular fields
-      for (let [key, value] of formData.entries()) {
-        prompt = prompt.replace(new RegExp(`{${key}}`, 'g'), value);
+  // Replace regular fields and remove empty sections
+  for (let [key, value] of formData.entries()) {
+    if (value.trim() === '') {
+      // Remove the entire line if the value is empty
+      prompt = prompt.replace(new RegExp(`.*{${key}}.*\\n?`, 'g'), '');
+    } else {
+      prompt = prompt.replace(new RegExp(`{${key}}`, 'g'), value);
+    }
+  }
+  
+  // Process dialogs
+  const dialogRows = dialogsContainer.querySelectorAll('.dialog-row');
+  let dialogsText = '';
+  
+  if (dialogRows.length > 0) {
+    dialogsText = '\n\nDialogs:';
+    let hasValidDialogs = false;
+    
+    dialogRows.forEach(row => {
+      const character = row.querySelector('.dialog-character').value.trim();
+      const dialog = row.querySelector('.dialog-text').value.trim();
+      
+      if (character || dialog) {
+        hasValidDialogs = true;
+        dialogsText += `\n${character || 'Unknown'}: "${dialog || '...'}"`;
       }
-      
-      // Process dialogs
-      const dialogRows = dialogsContainer.querySelectorAll('.dialog-row');
-      let dialogsText = '';
-      
-      if (dialogRows.length > 0) {
-        dialogsText = '\n\nDialogs:';
-        dialogRows.forEach(row => {
-          const character = row.querySelector('.dialog-character').value || 'Unknown';
-          const dialog = row.querySelector('.dialog-text').value || '...';
-          dialogsText += `\n${character}: "${dialog}"`;
-        });
-      }
-      
-      // Replace {dialogs} placeholder
-      prompt = prompt.replace('{dialogs}', dialogsText);
-
-      output.value = prompt;
     });
+    
+    if (!hasValidDialogs) {
+      dialogsText = '';
+    }
+  }
+  
+  // Replace {dialogs} placeholder
+  prompt = prompt.replace('{dialogs}', dialogsText);
+
+  // Clean up any remaining empty lines or placeholders
+  prompt = prompt
+    .replace(/\n{3,}/g, '\n\n') // Replace multiple newlines with double newlines
+    .replace(/\n+$/g, '') // Remove trailing newlines
+    .trim();
+
+  output.value = prompt;
+});
 
     copyBtn.addEventListener('click', () => {
       output.select();
