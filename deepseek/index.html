@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Veo3 Prompt Generator</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Veo3 Video Prompt Generator</h1>
+
+    <label for="template">Select Prompt Type:</label>
+<select id="template">
+  <option value="">-- Choose --</option>
+  <option value="default">Default Scene</option>
+  <option value="fantasy">Fantasy Nature</option>
+  <option value="offroad">Off-Road Action</option>
+  <option value="cooking">Cooking Cinematic</option>
+  <option value="sciFi">Sci-Fi Cityscape</option>
+  <option value="monologue">Character Monologue</option>
+  <option value="comedy">Absurd Comedy</option>
+  <option value="seaside">Seaside Mood</option>
+  <option value="historical">Historical Narrative</option>
+</select>
+
+    <form id="prompt-form"></form>
+    
+    <div id="dialogs-container"></div>
+    <button type="button" id="add-dialog-btn" style="display: none;">Add Dialog</button>
+
+    <button type="button" id="generate-btn">Generate Prompt</button>
+
+    <div class="result">
+      <h2>Generated Prompt:</h2>
+      <textarea id="output" readonly></textarea>
+      <button type="button" id="copy-btn">Copy to Clipboard</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
