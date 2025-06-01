@@ -50,7 +50,6 @@ const templates = {
       backgroundSoundEffects: 'Machine sounds, Voice prompts, Distant sirens'
     }
   }
-  // You can add more templates here as needed
 };
 
 function renderFormFields(templateKey) {
@@ -93,7 +92,7 @@ function addDialogLine() {
   dialogCount++;
 }
 
-// Event listeners
+// Event Listeners
 templateSelect.addEventListener('change', () => {
   const selected = templateSelect.value;
   renderFormFields(selected);
@@ -118,10 +117,10 @@ generateBtn.addEventListener('click', () => {
   }
 
   // Remove any remaining placeholder tags
-  prompt = prompt.replace(/{[^{}]+}/g, "");
+  prompt = prompt.replace(/{[^{}]+}/g, "").trim();
 
   // Clean up extra blank lines
-  prompt = prompt.replace(/\n\s*\n/g, "\n\n").trim();
+  prompt = prompt.replace(/\n\s*\n/g, "\n\n");
 
   // Build dialog lines
   const dialogLines = [];
@@ -130,7 +129,7 @@ generateBtn.addEventListener('click', () => {
     const text = formData.get(`dialogText${i}`);
 
     if (character && text && character.trim() !== "" && text.trim() !== "") {
-      dialogLines.push(`${character.trim()}: "${text.trim()}"`);
+      dialogLines.push(`${character}: "${text}"`);
     }
   }
 
