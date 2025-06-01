@@ -31,7 +31,6 @@ const templates = {
       audioElements: 'Gunfire echoes, Gentle classical piano'
     }
   },
-  // Include other templates here as before...
   sciFi: {
     prompt: `At night in {futuristicCityName}, towering skyscrapers surround streets filled with {visualElements}. The camera uses {cameraView} to show the city’s rhythm.\nThe protagonist is {characterDescription}, navigating through {cityscapeSetting}. The color scheme is {colorScheme}, with a mood that’s {emotionalTone}.\nBackground music includes {musicStyle}, layered with {backgroundSoundEffects}.`,
     fields: [
@@ -51,7 +50,7 @@ const templates = {
       backgroundSoundEffects: 'Machine sounds, Voice prompts, Distant sirens'
     }
   }
-  // You can paste other templates similarly — full code available on request
+  // You can add more templates here as needed
 };
 
 function renderFormFields(templateKey) {
@@ -73,7 +72,6 @@ function renderFormFields(templateKey) {
   });
 }
 
-// Add new dialog line
 function addDialogLine() {
   const wrapper = document.createElement('div');
   wrapper.className = 'dialog-line';
@@ -115,15 +113,15 @@ generateBtn.addEventListener('click', () => {
   // Replace only filled placeholders
   for (let [key, value] of formData.entries()) {
     if (value.trim() !== "") {
-      prompt = prompt.replace(new RegExp(`{${key}}`, 'g'), value);
+      prompt = prompt.replace(new RegExp(`{${key}}`, 'g'), value.trim());
     }
   }
 
-  // Clean up remaining placeholders and extra lines
-  prompt = prompt
-    .replace(/{[^{}]+}/g, "")
-    .replace(/\n\s*\n/g, "\n\n")
-    .trim();
+  // Remove any remaining placeholder tags
+  prompt = prompt.replace(/{[^{}]+}/g, "");
+
+  // Clean up extra blank lines
+  prompt = prompt.replace(/\n\s*\n/g, "\n\n").trim();
 
   // Build dialog lines
   const dialogLines = [];
@@ -132,11 +130,11 @@ generateBtn.addEventListener('click', () => {
     const text = formData.get(`dialogText${i}`);
 
     if (character && text && character.trim() !== "" && text.trim() !== "") {
-      dialogLines.push(`${character}: "${text}"`);
+      dialogLines.push(`${character.trim()}: "${text.trim()}"`);
     }
   }
 
-  // Add dialog section if any valid lines exist
+  // Add dialog section if there are valid lines
   if (dialogLines.length > 0) {
     prompt += `\n\nDialog:\n` + dialogLines.join('\n');
   }
