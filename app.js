@@ -76,25 +76,25 @@ const templates = {
       ambientKitchenSoundsOrSoftMusic: 'Knife chopping, Soft jazz'
     }
   },
-  sciFi: {
-    prompt: `At night in {futuristicCityName}, towering skyscrapers surround streets filled with {visualElements}. The camera uses {cameraView} to show the city’s rhythm.\nThe protagonist is {characterDescription}, navigating through {cityscapeSetting}. The color scheme is {colorScheme}, with a mood that’s {emotionalTone}.\nBackground music includes {musicStyle}, layered with {backgroundSoundEffects}.`,
-    fields: [
-      'futuristicCityName', 'visualElements', 'cameraView',
-      'characterDescription', 'cityscapeSetting', 'colorScheme',
-      'emotionalTone', 'musicStyle', 'backgroundSoundEffects'
-    ],
-    placeholders: {
-      futuristicCityName: 'Neo Tokyo, Hyperion Prime',
-      visualElements: 'Neon signs, Hovering traffic',
-      cameraView: 'Aerial bird’s-eye view',
-      characterDescription: 'Female bounty hunter in a silver cloak',
-      cityscapeSetting: 'Floating walkways or lower slums',
-      colorScheme: 'Cool blues mixed with magenta neon',
-      emotionalTone: 'Mysterious, Cold and intense',
-      musicStyle: 'Synthwave, Electronic basslines',
-      backgroundSoundEffects: 'Machine sounds, Voice prompts'
-    }
-  },
+ sciFi: {
+  prompt: `At night in {futuristicCityName}, towering skyscrapers surround streets filled with {visualElements}. The camera uses {cameraView} to show the city’s rhythm.\nThe protagonist is {characterDescription}, navigating through {cityscapeSetting}. The color scheme is {colorScheme}, with a mood that’s {emotionalTone}.\nBackground music includes {musicStyle}, layered with {backgroundSoundEffects}.`,
+  fields: [
+    'futuristicCityName', 'visualElements', 'cameraView',
+    'characterDescription', 'cityscapeSetting', 'colorScheme',
+    'emotionalTone', 'musicStyle', 'backgroundSoundEffects'
+  ],
+  placeholders: {
+    futuristicCityName: 'Neo Tokyo, Hyperion Prime, Cyberdome City',
+    visualElements: 'Neon signs, Hovering traffic, Robotic crowds',
+    cameraView: 'Aerial bird’s-eye view, Tracking POV shot',
+    characterDescription: 'Female bounty hunter in a silver cloak, Android street vendor',
+    cityscapeSetting: 'Floating walkways, Lower slums, Holographic billboards',
+    colorScheme: 'Cool blues mixed with magenta neon, Dark purples and chrome highlights',
+    emotionalTone: 'Mysterious, Cold and intense, Isolated',
+    musicStyle: 'Synthwave, Electronic basslines, Dystopian ambiance',
+    backgroundSoundEffects: 'Machine sounds, Voice prompts, Distant sirens'
+  }
+},
   monologue: {
     prompt: `The camera focuses on {characterDescription} sitting at {setting}, slowly telling a story about {topic}.\nLight pours in from {lightDirection}, emphasizing facial contours and subtle expressions. The camera uses {cameraTechnique}, and the palette is {colorPalette}.\nThe background is quiet, with occasional {backgroundSounds}, reinforcing a mood of {emotionalTone}.`,
     fields: [
